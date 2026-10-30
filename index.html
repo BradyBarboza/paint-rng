@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Roll a random colour and brush size. Make something unexpected.">
+  <title>Paint RNG</title>
+  <link rel="icon" href="assets/brand-dot.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=2">
+  <script src="script.js?v=2" defer></script>
+</head>
+<body>
+  <canvas id="canvas" aria-label="Drawing canvas. Roll the dice, then draw using a mouse, stylus, or touch.">Your browser needs Canvas support to draw.</canvas>
+  <header class="brand" aria-label="Paint RNG">
+    <img src="assets/brand-dot.svg" width="16" height="16" alt="">
+    <span>paint</span><span class="badge">RNG</span>
+  </header>
+  <nav class="actions" aria-label="Drawing actions">
+    <button id="save" hidden>Save drawing</button>
+    <button id="gallery-open">My gallery</button>
+    <button id="clear" hidden>Clear canvas</button>
+  </nav>
+  <p id="notice" class="notice" role="status" hidden></p>
+  <main id="guidance" class="guidance">
+    <h1 id="heading">Leave it to luck.</h1>
+    <p id="description">Click the dice for a random colour and brush size.</p>
+    <p id="detail">No picking or planning. Just paint with what you get.</p>
+  </main>
+  <section class="dock" aria-label="Painting controls">
+    <p class="hint" id="hint">01&nbsp; Click the dice &nbsp;→&nbsp; 02&nbsp; Get your tools &nbsp;→&nbsp; 03&nbsp; Draw</p>
+    <div class="toolbar">
+      <button id="roll" class="roll" aria-label="Roll a random colour and brush size" title="Roll a random colour and brush size">
+        <img src="assets/dice.png" width="64" height="64" alt="" draggable="false">
+      </button>
+      <div class="results">
+        <div class="result">
+          <span class="label">Colour</span>
+          <div class="preview"><span id="swatch" class="unknown">?</span></div>
+          <span id="colour-value" class="value">?</span>
+        </div>
+        <div class="result">
+          <span class="label">Brush size</span>
+          <div class="preview"><span id="brush" class="unknown">?</span></div>
+          <span id="size-value" class="value">?</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <dialog id="gallery-dialog" aria-labelledby="gallery-title">
+    <h2 id="gallery-title">My gallery</h2>
+    <p>Saved in this browser. Download a PNG to keep a copy on your computer.</p>
+    <div id="gallery-list" class="gallery-list"></div>
+    <form method="dialog"><button>Back to painting</button></form>
+  </dialog>
+  <dialog id="clear-dialog">
+    <h2>Start with a blank canvas?</h2>
+    <p>This removes your drawing. Your current brush stays ready.</p>
+    <form method="dialog"><button value="cancel" autofocus>Keep drawing</button><button value="clear" class="confirm">Clear canvas</button></form>
+  </dialog>
+</body>
+</html>

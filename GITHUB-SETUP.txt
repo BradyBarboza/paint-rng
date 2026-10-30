@@ -1,0 +1,17 @@
+GITHUB PAGES SETUP
+
+This folder is ready to be the root of a GitHub repository.
+Keep index.html, script.js, style.css, .nojekyll and assets together.
+
+1. Create or open your GitHub repository.
+2. Upload the contents of this folder to the main branch, not the outer folder.
+3. Open Settings, then Pages.
+4. Choose Deploy from a branch, select main and / (root), then Save.
+5. Wait for deployment and use the website link shown in Pages.
+
+No build tools, passwords, API keys or database are required.
+The gallery is stored on each visitor's browser. It is not shared between visitors.
+Local preview and GitHub Pages have separate galleries because their addresses differ.
+
+Official instructions:
+https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site

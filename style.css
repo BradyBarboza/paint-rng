@@ -1,0 +1,495 @@
+/* Shared colours and fonts */
+@font-face {
+  font-family: Nunito;
+  src: url('assets/nunito-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight:400;
+  font-display:swap;
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url('assets/nunito-bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight:700;
+  font-display:swap;
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url('assets/nunito-extrabold.ttf') format('truetype');
+  font-style: normal;
+  font-weight:800;
+  font-display:swap;
+}
+
+:root {
+  --ink:#242135;
+  --muted:#777386;
+  --purple:#7047eb;
+  --soft:#f6f4fa;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html,body {
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+body {
+  background:white;
+  color:var(--ink);
+  font-family:Nunito,Arial,sans-serif;
+}
+
+button {
+  font:inherit;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:focus-visible {
+  outline:3px solid var(--ink);
+  outline-offset:5px;
+}
+
+[hidden] {
+  display:none !important;
+}
+
+#canvas {
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  touch-action:none;
+  cursor:default;
+}
+
+#canvas.ready {
+  cursor:crosshair;
+}
+
+.brand {
+  position:fixed;
+  left:36px;
+  top:30px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font-size:28px;
+  font-weight:800;
+  pointer-events:none;
+  user-select:none;
+}
+
+.badge {
+  padding:4px 9px;
+  border-radius:8px;
+  background:#ffca45;
+  font-size:14px;
+}
+
+.guidance {
+  position:fixed;
+  left:50%;
+  top:34.4%;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:calc(100% - 48px);
+  pointer-events:none;
+}
+
+h1 {
+  margin:0 0 12px;
+  font-size:48px;
+  font-weight:800;
+  line-height:1.35;
+  letter-spacing:-.7px;
+}
+
+.guidance p {
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:20px;
+}
+
+.guidance p:last-child {
+  font-size:16px;
+  font-weight:700;
+}
+
+.dock {
+  position:fixed;
+  bottom:max(28px,env(safe-area-inset-bottom));
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  max-width:calc(100% - 24px);
+}
+
+.hint {
+  margin:0;
+  padding:12px 20px;
+  background:var(--soft);
+  color:var(--muted);
+  border-radius:24px;
+  font-size:14px;
+  font-weight:700;
+  text-align:center;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.toolbar {
+  display:flex;
+  align-items:center;
+  gap:24px;
+  padding:16px 24px;
+  border:1px solid #eae6f2;
+  border-radius:26px;
+  background:white;
+  box-shadow:0 10px 32px #2e1f4a17;
+}
+
+.roll {
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+  width:96px;
+  height:96px;
+  padding:16px;
+  border:0;
+  border-radius:22px;
+  background:var(--purple);
+  box-shadow:0 6px 14px #401a9933;
+  transition:transform .15s,background .15s;
+}
+
+.roll:hover {
+  background:#6239db;
+  transform:translateY(-2px);
+}
+
+.roll:active {
+  transform:scale(.94);
+}
+
+.roll img {
+  display:block;
+  width:64px;
+  height:64px;
+  object-fit:contain;
+  pointer-events:none;
+}
+
+.roll.rolling img {
+  animation:tumble .3s ease-out;
+}
+
+@keyframes tumble {
+  0% {
+    transform:rotate(-18deg) scale(.85);
+  }
+  60% {
+    transform:rotate(16deg) scale(1.12);
+  }
+  100% {
+    transform:rotate(0);
+  }
+}
+
+.results {
+  display:flex;
+  gap:12px;
+}
+
+.result {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  width:130px;
+  height:104px;
+  padding:10px 14px;
+  border-radius:16px;
+  background:var(--soft);
+}
+
+.label {
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.preview {
+  display:flex;
+  align-items:center;
+  height:40px;
+  flex-shrink:0;
+}
+
+.unknown {
+  font-size:28px;
+  font-weight:800;
+  color:var(--muted);
+}
+
+.colour-dot,.brush-dot {
+  display:block;
+  border-radius:50%;
+  box-shadow:inset 0 0 0 1px #24213512;
+}
+
+.colour-dot {
+  width:32px;
+  height:32px;
+}
+
+.value {
+  font-size:14px;
+  font-weight:800;
+}
+
+.clear {
+  position:fixed;
+  top:34px;
+  right:36px;
+  padding:10px 16px;
+  border:1px solid #eae6f2;
+  border-radius:14px;
+  background:white;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:700;
+}
+
+.clear:hover {
+  background:var(--soft);
+  color:var(--ink);
+}
+
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+}
+
+dialog {
+  width:min(420px,calc(100% - 32px));
+  border:1px solid #eae6f2;
+  border-radius:24px;
+  padding:28px;
+  color:var(--ink);
+  box-shadow:0 15px 60px #24213522;
+}
+
+dialog::backdrop {
+  background:#24213555;
+}
+
+dialog h2 {
+  margin:0 0 12px;
+  font-size:23px;
+}
+
+dialog p {
+  color:var(--muted);
+}
+
+dialog form {
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top:24px;
+}
+
+dialog button {
+  border:0;
+  border-radius:12px;
+  padding:12px;
+  background:var(--soft);
+  font-weight:700;
+}
+
+dialog .confirm {
+  background:var(--purple);
+  color:white;
+}
+
+@media(max-width:600px) {
+  .brand {
+    left:20px;
+    top:20px;
+    font-size:24px;
+  }
+  .clear {
+    right:16px;
+    top:20px;
+    font-size:12px;
+    padding:9px 12px;
+  }
+  .guidance {
+    top:29%;
+    max-width:calc(100% - 40px);
+    width:340px;
+  }
+  h1 {
+    font-size:34px;
+    line-height:1.2;
+  }
+  .guidance p {
+    font-size:16px;
+    line-height:1.5;
+  }
+  .guidance p:last-child {
+    font-size:14px;
+  }
+  .dock {
+    bottom:max(16px,env(safe-area-inset-bottom));
+  }
+  .toolbar {
+    gap:12px;
+    padding:12px;
+    border-radius:22px;
+  }
+  .roll {
+    width:72px;
+    height:80px;
+    padding:8px;
+    border-radius:18px;
+  }
+  .roll img {
+    width:56px;
+    height:56px;
+  }
+  .results {
+    gap:8px;
+  }
+  .result {
+    width:90px;
+    height:92px;
+    padding:8px 10px;
+  }
+  .label {
+    font-size:9px;
+  }
+  .value {
+    font-size:12px;
+  }
+  .hint {
+    padding:10px 12px;
+    font-size:11px;
+    white-space:normal;
+  }
+}
+
+@media(max-height:500px) {
+  .guidance {
+    top:23%;
+  }
+  h1 {
+    font-size:28px;
+    margin-bottom:5px;
+  }
+  .guidance p {
+    font-size:14px;
+    margin-bottom:5px;
+  }
+  .guidance p:last-child {
+    font-size:12px;
+  }
+  .dock {
+    bottom:12px;
+    gap:6px;
+  }
+  .hint {
+    padding:6px 12px;
+    font-size:11px;
+  }
+  .toolbar {
+    padding:8px 16px;
+    gap:16px;
+  }
+  .roll {
+    width:64px;
+    height:64px;
+    padding:4px;
+  }
+  .roll img {
+    width:52px;
+    height:52px;
+  }
+  .result {
+    height:72px;
+    width:105px;
+    padding:6px 12px;
+    gap:2px;
+  }
+  .preview {
+    height:30px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation:none !important;
+    transition:none !important;
+  }
+}
+
+
+/* Drawing actions stay separate from the dice controls. */
+.actions {
+  position: fixed;
+  top: 28px;
+  right: 28px;
+  display: flex;
+  gap: 8px;
+}
+.actions button {
+  padding: 10px 14px;
+  border: 1px solid #eae6f2;
+  border-radius: 12px;
+  background: white;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+.actions button:hover { background: var(--soft); }
+.notice {
+  position: fixed;
+  top: 74px;
+  right: 28px;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--soft);
+  font-size: 13px;
+  pointer-events: none;
+}
+#gallery-dialog { width: min(760px, calc(100% - 32px)); max-height: 85vh; }
+.gallery-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.gallery-list article { padding: 12px; background: var(--soft); border-radius: 16px; }
+.gallery-list img { width: 100%; height: 160px; object-fit: contain; background: white; border-radius: 8px; }
+.gallery-list p { font-size: 12px; }
+.gallery-list button { background: var(--purple); color: white; }
+@media (max-width: 600px) {
+  .actions { top: 66px; right: 16px; left: 16px; justify-content: flex-end; gap: 6px; }
+  .actions button { font-size: 12px; padding: 9px 11px; }
+  .notice { top: 102px; right: 16px; font-size: 12px; }
+  .gallery-list { grid-template-columns: 1fr; }
+}

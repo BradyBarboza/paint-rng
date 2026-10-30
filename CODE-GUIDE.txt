@@ -1,0 +1,62 @@
+PAINT RNG CODE GUIDE
+
+Start with index.html, then style.css, then script.js.
+
+HTML
+The canvas is the drawing surface. The buttons trigger actions. Colour and
+brush previews are span elements that JavaScript updates. The dialog element
+provides the Clear Canvas confirmation.
+
+CSS
+The stylesheet uses colours, spacing, borders, Flexbox and positioning.
+The :root variables hold shared colours. Media queries adjust smaller screens.
+:hover and :active give button feedback. @keyframes defines the dice animation.
+The reduced-motion rule respects the user's animation preference.
+
+JAVASCRIPT BASICS
+querySelector finds an HTML element. const holds references that do not get
+reassigned. let holds changing values. Functions group tasks under names.
+Event listeners run functions when the player clicks, draws, or resizes.
+The strokes array stores objects with a colour, size and array of x/y points.
+
+RANDOM TOOLS
+randomNumber uses Math.random and Math.floor to produce a whole number.
+randomColour picks from an array of coordinated colours. filter removes the
+previous colour before choosing. roll picks a brush size from 4 to 64 pixels,
+then updates text and styles.
+After the first roll, it picks from 60 values and skips the previous size.
+This gives each remaining size an equal chance without a repeating roll.
+
+DRAWING
+Pointer events support mouse, touch and stylus input through the same handlers.
+pointerdown starts a stroke and draws a dot. pointermove draws a line from the
+previous point to the new point. pointerup and pointercancel stop drawing.
+The pointer ID prevents a second finger from interfering with the active stroke.
+Pointer capture keeps drawing events connected during a drag.
+
+CANVAS METHODS TO LEARN
+getContext('2d') provides drawing commands. beginPath starts a shape or line.
+moveTo sets its start; lineTo adds its next point; stroke draws the line.
+arc and fill draw a circular dot. lineWidth controls thickness and lineCap
+makes the ends round.
+
+RESIZING
+Changing a canvas's dimensions erases it. The code saves strokes in an array
+and redraws them after a resize. devicePixelRatio and setTransform keep it sharp
+on high-resolution screens while drawing in normal screen-pixel coordinates.
+This is the most specialised part and can be studied separately from rolling.
+
+CLEARING
+The button opens a confirmation dialog. Confirming empties the strokes array
+and redraws the blank canvas. Cancelling leaves the drawing alone.
+
+SCOPE
+Plain HTML, CSS and JavaScript; no libraries or build tools. Canvas drawing and
+pointer capture may be new topics beyond the course outline. Understand these
+parts before presenting the project.
+
+GALLERY
+Save drawing copies the canvas onto a white background and uses toDataURL to
+create a PNG. JSON.stringify and JSON.parse convert the gallery array to and
+from text for localStorage. try and catch handle unavailable or full storage.
+DOM methods create gallery cards. A download link saves the PNG to the computer.
