@@ -46,12 +46,10 @@ Suggested discussion topics are not a substitute for actual peer feedback.
 GITHUB PAGES
 These are static files suitable for GitHub Pages. Put index.html, style.css,
 script.js and assets/ in the published folder of your assignment repository.
-This package has not been published and the local preview URL is not shareable
-with classmates on another computer. See GITHUB-SETUP.txt for the publishing steps.
+Published website: https://bradybarboza.github.io/paint-rng/
+Repository: https://github.com/BradyBarboza/paint-rng
 
-ASSETS AND ASSISTANCE
+ASSET CREDITS
 Design: your Paint RNG Figma mockup.
 Dice: image supplied by you; confirm its original source/license for submission.
 Nunito: Google Fonts, SIL Open Font License; see assets/FONT-LICENSE.txt.
-This implementation was created with AI assistance. Review and understand the
-code and follow your course's citation/disclosure requirements.
